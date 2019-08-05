@@ -11,10 +11,10 @@ from linebot.models import (
     FollowEvent, MessageEvent, TextMessage, TextSendMessage, ImageMessage, ImageSendMessage, TemplateSendMessage, ButtonsTemplate, PostbackTemplateAction, MessageTemplateAction, URITemplateAction
 )
 import os
-# import urllib.request
-# import json
-# import making_question as mk
-# from argparse import ArgumentParser
+import urllib.request
+import json
+import making_question as mk
+from argparse import ArgumentParser
 
 # 軽量なウェブアプリケーションフレームワーク:Flask
 app = Flask(__name__)
@@ -48,11 +48,11 @@ def callback():
 # MessageEvent
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    choice = "Hello, world!"
+    aa = "Hello, world!"
 
 	line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=choice)
+        TextSendMessage(text=aa)
      )
 
 if __name__ == "__main__":
