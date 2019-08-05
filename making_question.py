@@ -11,9 +11,8 @@ def do(texts):
     #         "_Keio is the best university in the world.",
     #         "I've been (to) America."]
     #
-    sentences = []
-    for line in sys.texts.readlines():
-        texts.append(line.rstrip())
+    sentences = texts.split("/n")
+    result = ""
 
     for sentence in sentences:
         words = sentence.split(" ")
@@ -55,4 +54,5 @@ def do(texts):
         rnd_words = random.sample(words, len(words))
         choices = rnd_words + symbols
         choice = '( ' + ' / '.join(choices) + ' )'
-    return choice
+        result =+ choice
+    return result
