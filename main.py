@@ -15,6 +15,7 @@ import os
 import sys
 import json
 from argparse import ArgumentParser
+import making_question
 
 # 軽量なウェブアプリケーションフレームワーク:Flask
 app = Flask(__name__)
@@ -48,10 +49,10 @@ def callback():
 # MessageEvent
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    # result = "Hello, world!"
+    result = "Hello world"
 	line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text="Hello world")
+        TextSendMessage(text=result)
      )
 
 if __name__ == "__main__":
