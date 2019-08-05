@@ -11,7 +11,7 @@ def do(texts):
     #         "_Keio is the best university in the world.",
     #         "I've been (to) America."]
     #
-    sentences = texts.split("/n")
+    sentences = texts.splitlines()
     result = ""
 
     for sentence in sentences:
