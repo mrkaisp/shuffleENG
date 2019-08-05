@@ -12,7 +12,7 @@ def do(texts):
     #         "I've been (to) America."]
 
     texts = []
-    for line in texts.readlines():
+    for line in sys.texts.readlines():
         texts.append(line.rstrip())
 
     for sentence in texts:
