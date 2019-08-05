@@ -12,7 +12,7 @@ def do(texts):
     #         "I've been (to) America."]
     #
     sentences = texts.splitlines()
-    result = ""
+    results = []
 
     for sentence in sentences:
         words = sentence.split(" ")
@@ -53,5 +53,5 @@ def do(texts):
         rnd_words = random.sample(words, len(words))
         choices = rnd_words + symbols
         choice = '( ' + ' / '.join(choices) + ' )'
-        result += '\n' + choice
-    return result
+        results.append(choice)
+    return '\n'.join(results)
