@@ -54,5 +54,5 @@ def do(texts):
         rnd_words = random.sample(words, len(words))
         choices = rnd_words + symbols
         choice = '( ' + ' / '.join(choices) + ' )'
-        result =+ choice
+        result += choice
     return result
