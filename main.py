@@ -10,10 +10,10 @@ from linebot.exceptions import (
 from linebot.models import (
     FollowEvent, MessageEvent, TextMessage, TextSendMessage, ImageMessage, ImageSendMessage, TemplateSendMessage, ButtonsTemplate, PostbackTemplateAction, MessageTemplateAction, URITemplateAction
 )
-import os
 import urllib.request
+import os
+import sys
 import json
-import making_question as mk
 from argparse import ArgumentParser
 
 # 軽量なウェブアプリケーションフレームワーク:Flask
@@ -47,12 +47,12 @@ def callback():
 
 # MessageEvent
 @handler.add(MessageEvent, message=TextMessage)
+result = "Hello, world!"
 def handle_message(event):
-    aa = "Hello, world!"
 
 	line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=aa)
+        TextSendMessage(text=result)
      )
 
 if __name__ == "__main__":
