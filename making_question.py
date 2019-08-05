@@ -1,16 +1,10 @@
 import re
-import sys
 import random
-# from tkinter import messagebox
+import unicodedata
 
 def do(texts):
-    # texts = ["I think so.",
-    #         "Do you play soccer?",
-    #         "Help me, please.",
-    #         "I'm using Python_3.",
-    #         "_Keio is the best university in the world.",
-    #         "I've been (to) America."]
-    #
+    if unicodedata.east_asian_width(texts) != Na:
+        return "英文を入力してください。\n\n◎入力方法を知りたい場合は「How to use」と送信してください。"
     sentences = texts.splitlines()
     results = []
 
