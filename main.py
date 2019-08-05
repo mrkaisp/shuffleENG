@@ -50,7 +50,24 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     sentences = event.message.text
-    result = making_question.do(sentences)
+
+    if sentences == 'how to use':
+        result = '''1行に1文ずつ英語を入力してください。並び替え問題の語群を返します。
+
+        ①先頭文字が固有名詞の場合は、先頭に"_"(アンダーバー)を入力してください。
+        　e.g. _Kai is an English teacher.
+
+        ②セットで語群に入れたい単語同士は、"_"(アンダーバー)で繋いでください。
+        　e.g. Do you like Mr._Kai?
+
+        ③適語補充型の問題にしたい場合は、補充語を()で囲ってください。
+        　e.g. I've been (to) America.
+
+        ④不要語を追加したい場合は、文の後に追加して入力してください。
+        　e.g. I've been to America. visited'''
+    else:
+        result = making_question.do(sentences)
+
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=result)

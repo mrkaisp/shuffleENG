@@ -4,7 +4,7 @@ import unicodedata
 
 def do(texts):
     if unicodedata.east_asian_width(texts[0]) != 'Na':
-        return "英文を入力してください。\n\n◎入力方法を知りたい場合は「How to use」と送信してください。"
+        return "英文を入力してください。\n\n◎入力方法を知りたい場合は「how to use」と送信してください。"
     else:
         sentences = texts.splitlines()
         results = []
