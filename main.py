@@ -47,12 +47,11 @@ def callback():
 
 # MessageEvent
 @handler.add(MessageEvent, message=TextMessage)
-result = "Hello, world!"
 def handle_message(event):
-
+    # result = "Hello, world!"
 	line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=result)
+        TextSendMessage(text="Hello world")
      )
 
 if __name__ == "__main__":
