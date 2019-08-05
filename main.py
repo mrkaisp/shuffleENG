@@ -55,13 +55,13 @@ def handle_message(event):
         result = '1行に1文ずつ英語を入力してください。並び替え問題の語群を返します。\n\n'\
         '【注意】\n'\
         '❶先頭文字が固有名詞の場合は、先頭に"_"(アンダーバー)を入力してください。\n'\
-        '　e.g. _Kai is a good teacher.\n\n'\
+        '　e.g. _Kai likes beer.\n\n'\
         '❷セットで語群に入れたい単語同士は、"_"(アンダーバー)で繋いでください。\n'\
         '　e.g. Do you like Mr._Kai?\n\n'\
         '❸適語補充型の問題にしたい場合は、補充語を()で囲ってください。\n'\
-        '　e.g. I\'ve been (to) America.\n\n'\
+        '　e.g. I went (to) China.\n\n'\
         '❹不要語を追加したい場合は、文の後に追加して入力してください。\n'\
-        '　e.g. I\'ve been to America. visited'
+        '　e.g. This is a pen. are'
     else:
         result = making_question.do(sentences)
 
