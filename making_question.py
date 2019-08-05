@@ -16,7 +16,6 @@ def do(texts):
 
     for sentence in sentences:
         words = sentence.split(" ")
-        words = texts.split(" ")
         wordsCount = len(words)
         symbols = []
         hidden = []
@@ -54,5 +53,5 @@ def do(texts):
         rnd_words = random.sample(words, len(words))
         choices = rnd_words + symbols
         choice = '( ' + ' / '.join(choices) + ' )'
-        result += choice
+        result += /n + choice
     return result
