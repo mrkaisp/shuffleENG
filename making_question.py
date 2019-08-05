@@ -3,17 +3,17 @@ import sys
 import random
 # from tkinter import messagebox
 
-def do():
-    texts = ["I think so.",
-            "Do you play soccer?",
-            "Help me, please.",
-            "I'm using Python_3.",
-            "_Keio is the best university in the world.",
-            "I've been (to) America."]
+def do(texts):
+    # texts = ["I think so.",
+    #         "Do you play soccer?",
+    #         "Help me, please.",
+    #         "I'm using Python_3.",
+    #         "_Keio is the best university in the world.",
+    #         "I've been (to) America."]
 
-    # texts = []
-    # for line in sys.stdin.readlines():
-    #     texts.append(line.rstrip())
+    texts = []
+    for line in texts.readlines():
+        texts.append(line.rstrip())
 
     for sentence in texts:
         words = sentence.split(" ")
