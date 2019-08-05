@@ -44,10 +44,9 @@ def callback():
 # MessageEvent
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    msg = event.message.text
 	line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text='「' + msg + '」って何？')
+        TextSendMessage(text='「' + event.message.text + '」って何？')
      )
 
 if __name__ == "__main__":
