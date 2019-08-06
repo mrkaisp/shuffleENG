@@ -23,7 +23,8 @@ def do(texts):
                 words[0] = firstW.lower()
 
             def remake(n, word):
-                if not re.much('Mr\.|Ms\.|Mr\.|Mt\.|Dr\.|a\.m\.|p\.m\.', word):
+                excepts = ['Mr.', 'Ms.', 'Mrs.', 'Mt.', 'Dr.', 'a.m.', 'p.m.']
+                if not word in excepts:
                     del_sym = '[.|,|?]'
                     # 記号を除去
                     reword = re.sub(del_sym, "", word)
