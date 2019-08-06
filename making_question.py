@@ -24,7 +24,7 @@ def do(texts):
 
             def remake(n, word):
                 excepts = ['Mr.', 'Ms.', 'Mrs.', 'Mt.', 'Dr.', 'a.m.', 'p.m.']
-                if not word in excepts:
+                if word not in excepts:
                     del_sym = '[.|,|?]'
                     # 記号を除去
                     reword = re.sub(del_sym, "", word)
