@@ -23,20 +23,21 @@ def do(texts):
                 words[0] = firstW.lower()
 
             def remake(n, word):
-                del_sym = '[.|,|?]'
-                # 記号を除去
-                reword = re.sub(del_sym, "", word)
-                reword = re.sub('_', ' ', reword)
-                words[n] = reword
-                # 記号をsymbolsリストに格納
-                symbol = re.findall(del_sym, word)
-                if len(symbol) == 1:
-                    symbols.append(symbol[0])
-                # elif len(symbol) >= 2:
-                #     messagebox.showerror('エラー', '記号文字の使い方が正しくありません')
-                # 要補足単語リストに追加
-                if '(' in word:
-                    hidden.append(n)
+                if not re.much('Mr\.|Ms\.|Mr\.|Mt\.|Dr\.|a\.m\.|p\.m\.', word):
+                    del_sym = '[.|,|?]'
+                    # 記号を除去
+                    reword = re.sub(del_sym, "", word)
+                    reword = re.sub('_', ' ', reword)
+                    words[n] = reword
+                    # 記号をsymbolsリストに格納
+                    symbol = re.findall(del_sym, word)
+                    if len(symbol) == 1:
+                        symbols.append(symbol[0])
+                    # elif len(symbol) >= 2:
+                    #     messagebox.showerror('エラー', '記号文字の使い方が正しくありません')
+                    # 要補足単語リストに追加
+                    if '(' in word:
+                        hidden.append(n)
 
             for (index, word) in enumerate(words):
                     remake(index, word)
