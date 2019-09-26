@@ -16,6 +16,7 @@ import sys
 import json
 from argparse import ArgumentParser
 import making_question
+import making_question_2
 
 # 軽量なウェブアプリケーションフレームワーク:Flask
 app = Flask(__name__)
@@ -63,7 +64,7 @@ def handle_message(event):
         '❹不要語を追加したい場合は、文の後に追加して入力してください。\n'\
         '　e.g. This is a pen. are'
     else:
-        result = making_question.do(sentences)
+        result = making_question_2.do(sentences)
 
     line_bot_api.reply_message(
         event.reply_token,
