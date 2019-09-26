@@ -104,6 +104,6 @@ def Do(msg):
     else:
         print("入力形式が不適切です。\n\n◎入力方法を知りたい場合は「how to use」と送信してください。")
 
-with open("textdata2.txt", encoding='UTF-8') as f:
-    msg = f.read()
-Do(msg)
+# with open("textdata2.txt", encoding='UTF-8') as f:
+#     msg = f.read()
+# Do(msg)
