@@ -92,17 +92,17 @@ def answer(msg):
     last = Export()
 
     if first.language() == "OTHER":
-        print("英文を入力してください。\n\n◎入力方法を知りたい場合は「how to use」と送信してください。")
+        return "英文を入力してください。\n\n◎入力方法を知りたい場合は「how to use」と送信してください。"
     elif first.language() == "EE":
         group = second.do(first.rtn())
-        print(last.combine(group))
+        return last.combine(group)
     elif first.language() == "EJ":
         eng = second.en_divid(0)
         group = second.do(eng)
         jpn = second.en_divid(1)
-        print(last.combine(group, jpn))
+        return last.combine(group, jpn)
     else:
-        print("入力形式が不適切です。\n\n◎入力方法を知りたい場合は「how to use」と送信してください。")
+        return "入力形式が不適切です。\n\n◎入力方法を知りたい場合は「how to use」と送信してください。"
 
 # with open("textdata2.txt", encoding='UTF-8') as f:
 #     msg = f.read()
