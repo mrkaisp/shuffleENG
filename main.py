@@ -15,7 +15,7 @@ import os
 import sys
 import json
 from argparse import ArgumentParser
-import making_question
+# import making_question
 import making_question_2
 
 # 軽量なウェブアプリケーションフレームワーク:Flask
