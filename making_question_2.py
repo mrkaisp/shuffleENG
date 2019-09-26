@@ -4,7 +4,7 @@ import unicodedata
 
 class Reading:  #原文取得
     def __init__(self, texts):
-        self.texts = msg
+        self.texts = texts
         self.sentences = self.texts.splitlines()
 
     def language(self):
