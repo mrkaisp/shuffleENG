@@ -85,7 +85,7 @@ class Export_2(Export):
         return '\n'.join(e)
 
 # 生成作業
-def Do(msg):
+def answer(msg):
     # クラスまとめ
     first = Reading(msg)
     second = Making(first.rtn())
@@ -106,4 +106,4 @@ def Do(msg):
 
 # with open("textdata2.txt", encoding='UTF-8') as f:
 #     msg = f.read()
-# Do(msg)
+# answer(msg)

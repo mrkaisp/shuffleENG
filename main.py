@@ -64,7 +64,7 @@ def handle_message(event):
         '❹不要語を追加したい場合は、文の後に追加して入力してください。\n'\
         '　e.g. This is a pen. are'
     else:
-        result = making_question_2.do(sentences)
+        result = making_question_2.answer(sentences)
 
     line_bot_api.reply_message(
         event.reply_token,
