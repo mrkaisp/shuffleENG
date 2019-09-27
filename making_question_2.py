@@ -37,9 +37,10 @@ class Making:
             # 頭文字の処理: 'I' => 処理せず '_' => 削除
             def top(words):
                 firstW = words[0]
+                contracted = ["I", "I'm", "I've", "I'd", "I’m", "I’ve", "I’d" ]
                 if firstW[0] == '_':
                     words[0] = re.sub('_', "", firstW)
-                elif firstW != 'I' and firstW != "I'm" and firstW != "I've":
+                elif firstW not in contracted:
                     words[0] = firstW.lower()
                 return words
 
