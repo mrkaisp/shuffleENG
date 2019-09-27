@@ -11,9 +11,9 @@ class Reading:  #原文取得
     def language(self):
         def uni(str):
             return unicodedata.east_asian_width(str) != 'Na'
-        if uni(self.texts[0]):
+        if uni(self.sentences[0][-1]):
             return "OTHER"
-        elif len(self.sentences) == 1:
+        if len(self.sentences) == 1:
             return "EE"
         elif uni(self.sentences[1][-1]):
             return "EJ"
