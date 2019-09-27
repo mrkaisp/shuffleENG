@@ -4,7 +4,7 @@ import unicodedata
 
 class Reading:  #原文取得
     def __init__(self, texts):
-        self.sentences = [line.strip() for line in texts.splitlines()]
+        self.sentences = [line.strip() for line in texts.splitlines() if line != ""]
         self.texts = texts
 
     def language(self):
@@ -47,7 +47,7 @@ class Making:
                 return words
 
             def remake(n, word):
-                del_sym = '[.|,|?]'
+                del_sym = '[.|,|?|!|!?|?!]'
                 # 記号を除去
                 reword = re.sub(del_sym, "", word)
                 reword = re.sub('_', ' ', reword)

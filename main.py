@@ -62,7 +62,11 @@ def handle_message(event):
         '❸適語補充型の問題にしたい場合は、補充語を()で囲ってください。\n'\
         '　e.g. I went (to) China.\n\n'\
         '❹不要語を追加したい場合は、文の後に追加して入力してください。\n'\
-        '　e.g. This is a pen. are'
+        '　e.g. This is a pen. are\n\n'\
+        '英文の次の行に日本語訳を入力すると、「日本語＋語群」の形で返します。\n'\
+        '　e.g.\n'\
+        '　This is a pen.\n'\
+        '　これはペンです。'
     else:
         result = making_question_2.answer(sentences)
 
