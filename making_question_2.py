@@ -4,8 +4,8 @@ import unicodedata
 
 class Reading:  #原文取得
     def __init__(self, texts):
+        self.sentences = [line.strip() for line in texts.splitlines()]
         self.texts = texts
-        self.sentences = self.texts.splitlines()
 
     def language(self):
         def uni(str):
@@ -106,4 +106,4 @@ def answer(msg):
 
 # with open("textdata2.txt", encoding='UTF-8') as f:
 #     msg = f.read()
-# answer(msg)
+# print(answer(msg))
