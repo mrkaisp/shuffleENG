@@ -6,7 +6,6 @@ class Reading:  #原文取得
     def __init__(self, texts):
         self.sentences = [line.strip() for line in texts.splitlines() if line != ""]
         self.texts = texts
-        print(self.sentences)
 
     def language(self):
         def uni(str):
