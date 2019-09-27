@@ -12,6 +12,8 @@ class Reading:  #原文取得
             return unicodedata.east_asian_width(str) != 'Na'
         if uni(self.texts[0]):
             return "OTHER"
+        elif len(self.sentences) == 1:
+            return "EE"
         elif uni(self.sentences[1][-1]):
             return "EJ"
         else:
