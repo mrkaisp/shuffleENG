@@ -15,8 +15,7 @@ import os
 import sys
 import json
 from argparse import ArgumentParser
-# import making_question
-import making_question_2
+import making_question
 
 # 軽量なウェブアプリケーションフレームワーク:Flask
 app = Flask(__name__)
@@ -68,7 +67,7 @@ def handle_message(event):
         '　This is a pen.\n'\
         '　これはペンです。'
     else:
-        result = making_question_2.answer(sentences)
+        result = making_question.answer(sentences)
 
     line_bot_api.reply_message(
         event.reply_token,
