@@ -114,7 +114,7 @@ def answer(msg):
 if デバック == 0:
     exit()
 
-with open("textdata2.txt", encoding='UTF-8') as f:
+with open("textdata.txt", encoding='UTF-8') as f:
     msg = f.read()
 
 print(answer(msg))
