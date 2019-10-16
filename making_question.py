@@ -7,17 +7,17 @@ class Reading:  #原文取得
         self.sentences = [line.strip() for line in texts.splitlines() if line != ""]
         self.texts = texts
 
+    def uni(self, str):
+        return unicodedata.east_asian_width(str) != 'Na'
+
     def language(self):
-        def uni(str):
-            return unicodedata.east_asian_width(str) != 'Na'
-        if uni(self.sentences[0][-1]):
+        if self.uni(self.sentences[0][-1]):
             return "OTHER"
         if len(self.sentences) == 1:
-            return "EE"
-        elif uni(self.sentences[1][-1]):
-            return "EJ"
-        else:
-            return "EE"
+            return "ONLY ENG"
+        if self.uni(self.sentences[1][-1]):
+            return "ENG AND JPN"
+        return "ONLY ENG"
 
     def rtn(self):
         return self.sentences
@@ -26,40 +26,45 @@ class Making:
     def __init__(self, sentences):
         self.sentences = sentences
 
-    def en_divid(self, n):
+    def en_or_jpn(self, n):
         return [item for index, item in enumerate(self.sentences) if index % 2 == n]
 
-    def do(self, sentences):  # 語群作成
+    # 頭文字の処理: 'I' => 処理せず '_' => 削除
+    def top(self, words):
+        firstW = words[0]
+        contracted = ["I", "I'm", "I've", "I'd", "I’m", "I’ve", "I’d" ]
+        if firstW[0] == '_':
+            words[0] = re.sub('_', "", firstW)
+        elif firstW not in contracted:
+            words[0] = firstW.lower()
+        return words
+
+    def each_word(self, words):
+        symbols = []
+        hidden = []
+        for index, word in enumerate(words):
+            del_sym = '[.|,|?|!|!?|?!]'
+            # 記号を除去
+            no_sym_word = re.sub(del_sym, "", word)
+            reword = re.sub('_', ' ', no_sym_word)
+            words[index] = reword
+            # 記号をsymbolsリストに格納
+            symbol = re.findall(del_sym, word)
+            if len(symbol) == 1:
+                symbols.append(symbol[0])  # symbolリストが空の場合のバグ回避
+            # 要補足単語リストに追加
+            if '(' in word:
+                hidden.append(index)
+        return [words, symbols, hidden]
+
+    def grouping(self, sentences):  # 語群作成
         results = []
         for index, sentence in enumerate(sentences):
-            words_list = sentence.split(" ")
-            symbols = []
-            hidden = []
-
-            # 頭文字の処理: 'I' => 処理せず '_' => 削除
-            def top(words):
-                firstW = words[0]
-                contracted = ["I", "I'm", "I've", "I'd", "I’m", "I’ve", "I’d" ]
-                if firstW[0] == '_':
-                    words[0] = re.sub('_', "", firstW)
-                elif firstW not in contracted:
-                    words[0] = firstW.lower()
-                return words
-
-            def remake(n, word):
-                del_sym = '[.|,|?|!|!?|?!]'
-                # 記号を除去
-                reword = re.sub(del_sym, "", word)
-                reword = re.sub('_', ' ', reword)
-                words_list[n] = reword
-                # 記号をsymbolsリストに格納
-                symbol = re.findall(del_sym, word)
-                if len(symbol) == 1: symbols.append(symbol[0])  # symbolリストが空の場合のバグ回避
-                # 要補足単語リストに追加
-                if '(' in word: hidden.append(n)
-
-            words_list = top(words_list)
-            for index, word in enumerate(words_list): remake(index, word)
+            splited = self.top(sentence.split(" "))
+            remade = self.each_word(splited)
+            words_list = remade[0]
+            symbols = remade[1]
+            hidden = remade[2]
 
             # 要補足単語を除去
             dellist = lambda items, indexes: [item for index, item in enumerate(items) if index not in indexes]
@@ -67,20 +72,16 @@ class Making:
 
             rnd_words = random.sample(words_list, len(words_list))
             choices = rnd_words + symbols
-            choice = '( ' + ' / '.join(choices) + ' )'
+            choice = '( {} )'.format(' / '.join(choices))
             results.append(choice)
         return results
 
-    def jpn(self):  # 日本語リスト作成
-        return [sentence for index, sentence in enumerate(self.sentences) if index % 2 == 1]
-
 class Export:  # 英文日文結合作業
-    def combine(self, e, j = []):
+    def combine(self, e, j):
         if len(j) == 0:
             questions = e
         else:
-            questions = [Jpn + "　" + e[num] for num, Jpn in enumerate(j)]
-
+            questions = [j[i] + "　" + e[i] for i in range(len(j))]
         return '\n'.join(questions)
 
 class Export_2(Export):
@@ -96,17 +97,24 @@ def answer(msg):
 
     if first.language() == "OTHER":
         return "英文を入力してください。\n\n◎入力方法を知りたい場合は「how to use」と送信してください。"
-    elif first.language() == "EE":
-        group = second.do(first.rtn())
-        return last.combine(group)
-    elif first.language() == "EJ":
-        eng = second.en_divid(0)
-        group = second.do(eng)
-        jpn = second.en_divid(1)
-        return last.combine(group, jpn)
+    if first.language() == "ONLY ENG":
+        eng = first.rtn()
+        group = second.grouping(eng)
+        jpn = []
+    elif first.language() == "ENG AND JPN":
+        eng = second.en_or_jpn(0)
+        group = second.grouping(eng)
+        jpn = second.en_or_jpn(1)
     else:
         return "入力形式が不適切です。\n\n◎入力方法を知りたい場合は「how to use」と送信してください。"
+    return last.combine(group, jpn)
 
-# with open("textdata2.txt", encoding='UTF-8') as f:
-#     msg = f.read()
-# print(answer(msg))
+# pushする際はデバック変数に0を代入
+デバック = 0
+if デバック == 0:
+    exit()
+
+with open("textdata2.txt", encoding='UTF-8') as f:
+    msg = f.read()
+
+print(answer(msg))
