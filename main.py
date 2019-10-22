@@ -31,6 +31,7 @@ handler = WebhookHandler(LINE_CHANNEL_SECRET)
 
 @app.route("/callback", methods=['POST'])
 def callback():
+    print("Hello")
     # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
 
@@ -43,7 +44,7 @@ def callback():
         handler.handle(body, signature)
     except InvalidSignatureError:
         abort(400)
-        
+
     return 'OK'
 
 # MessageEvent
